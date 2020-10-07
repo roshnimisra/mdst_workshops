@@ -16,6 +16,8 @@ def is_palindrome(word):
     """
     returns whether `word` is spelled the same forwards and backwards
     """
+    # converts string into lowercase
+    word = word.lower()
     # track count of repeated letters
     count = 0
     i = 0
@@ -55,8 +57,24 @@ def count_words(text):
         {'how': 1, 'much': 1, 'wood': 1, 'would': 1, 'a': 2, 'woodchuck': 2,
         'chuck': 2, 'if': 1, 'could': 1, 'wood?': 1}
     """
+    # convert text to all lowercase and add space to terminate string
+    text = text.lower() + " "
+    # initialize empty dictionary and blank word
+    dict = {}
+    new_word = ""
+    # add words in text to dict
+    for char in text:
+        if char.isspace() == False:
+            new_word += char
+        else:
+            if new_word in dict.keys():
+                dict[new_word] += 1
+                new_word = ""
+            else:
+                dict[new_word] = 1
+                new_word = ""
+    return dict
 
-    
     
 # test cases
 print(is_odd(0))
@@ -72,3 +90,7 @@ print(is_palindrome("lol"))
 
 print(only_odds([1, 2, 3, 4, 5, 6]))
 print(only_odds([-2, -1, 0, 1, 2]))
+
+print(count_words("Roshni Misra roshni misra ROSHNI MISRA"))
+print(count_words("How much wood would a woodchuck chuck"
+                    " if a woodchuck could chuck wood?"))
